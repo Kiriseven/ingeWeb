@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>区块链</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css">
+	  <script src="/js/jquery-3.0.0.min.js"></script>
+      <script src="/js/bootstrap.min.js"></script>
+	<style type="text/css">
+		.clearboth{
+			clear: both;
+		}
+		.blockdiv{
+			width: 220px;
+			height: 150px;
+			margin-top: 30px;
+			margin-left: 50px;
+			float: right;
+		}
+		.blockdiv1{
+			width: 220px;
+			height: 100px;
+			padding:20px 5px;
+/*			display:block;*/
+			background-color: #5f8c89;
+			word-break: break-all;
+			word-wrap: break-word;
+		    color: #FFFFFF;
+		}
+		.blockdiv2{
+			border: 1px solid #AAAAAA;
+			width: 220px;
+			height: 40px;
+			line-height: 40px;
+			padding-left: 5px;
+		}
+		.nav>li>a:hover,.nav>li>a:focus{
+			background-color: #016257;
+			color: #FFFFFF;
+		}
+		.nav>li>a{
+			color: #000000;
+		}
+		.nav{
+			font-family: 微软雅黑;
+		}
+		.nav-tabs>li.active>a,.nav-tabs>li.active>a:hover,.nav-tabs>li.active>a:focus{
+			color: #FFFFFF;
+			background-color: #016257;
+		}
+		#movediv{
+			width: 0px;
+			height: 180px;
+		}
+	</style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" style="height: 70px;background-color: #016257;">
+  <div class="container" >
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><p style="font-size: 33px;color: #FFFFFF;margin-top: 10px;">Blockchain</p></a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <form class="navbar-form navbar-right" role="search" style="margin-top: 18px;">
+        <img src="/images/tubiao.png">
+        <button type="submit" class="btn btn-success" style="font-size: 22px;background-color: #016257;border: 0px;">Login in</button>
+      </form>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+	<div class="container" style="margin-top: 90px;">
+		<div class="row">
+        <div class="col-md-5">
+        	<p style="width: 145px;height: 40px;background-color: #016257;text-align: center;color: #FFFFFF;line-height: 40px;font-size: 15px;font-family: 微软雅黑;">用户管理</p>
+        	<div style="height: 450px;border: 1px solid #5f8c89;width: 400px;margin-top: -10px;">
+        	<table class="table table-bordered" id="table1" style="width: 400px;">
+        	<tr >
+        		<td  style="width: 100px;font-size: 16px;font-weight: bold;font-family: 微软雅黑;border-right:1px solid #5f8c89;border-bottom:1px solid #5f8c89;">用户姓名</td>
+        		<td style="font-size: 16px;font-weight: bold;font-family: 微软雅黑;border-bottom:1px solid #5f8c89;">联系方式 </td>
+        	</tr>
+            {{#each userData}}
+                <tr >
+                    <td  style="height: 40px;border-right:1px solid #5f8c89;border-bottom:1px solid #5f8c89;padding: 7px;padding-left:10px;">{{this.name}}</td>
+                    <td style="height: 40px;border-bottom:1px solid #5f8c89;padding: 7px;padding-left:10px;">{{this.contact}}<a class="deltr" href="javascript:;" style="float: right;margin-right: 15px;"><img src="images/002.jpg"></a><a class="firsta" style="margin-right: 15px;float: right;" href="javascript:;"><img src="images/001.jpg"></a></td>
+                </tr>
+
+                {{/each}}
+
+            </table>
+            <div style="top:440px;margin-left: 10px;position: absolute;"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="width: 32px;height: 32px;background-image: url('images/003.jpg')"></button></div>
+            </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">新增用户</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="user-name" class="control-label" id="iname">用户姓名：</label>
+            <input type="text" class="form-control" id="user-name">
+          </div>
+          <div class="form-group">
+            <label for="contact-way" class="control-label" id="icontact">联系方式：</label>
+            <input type="text" class="form-control" id="contact-way">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+        <button type="button" class="btn btn-primary" id="bt" data-dismiss="modal" onclick="assign()">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+        </div>
+        <div class="col-md-7" >
+        <div>
+        <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist" style="text-align: center;">
+            <li role="presentation" class="active" style="width: 120px;height: 40px; "><a href="#home" aria-controls="home" role="tab" data-toggle="tab">积分管理</a></li>
+            <li role="presentation" style="width: 120px;height: 40px;"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">积分转移</a></li>
+            <li role="presentation" style="width: 120px;height: 40px;"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">积分查询</a></li>
+          </ul>
+
+  <!-- Tab panes -->
+          <div class="tab-content" style="border: 1px solid #5f8c89;height: 470px;">
+            <div role="tabpanel" class="tab-pane fade in active" id="home">1...</div>
+            <div role="tabpanel" class="tab-pane fade" id="profile">
+            	<form class="form-horizontal"  style="margin-top: 80px;margin-right: 80px;">
+  <div class="form-group">
+    <label for="src-user" class="col-sm-2 control-label">来源用户</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="src-user" placeholder="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="goal-user" class="col-sm-2 control-label">目的用户</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="goal-user" placeholder="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="Amount" class="col-sm-2 control-label">数额</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="Amount" placeholder="">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default" onclick="transfer()">转移</button>
+    </div>
+  </div>
+</form>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="messages">
+            	<form class="form-horizontal" style="margin-top: 80px;margin-right: 80px;" >
+  <div class="form-group">
+    <label for="query-user" class="col-sm-2 control-label">查询用户</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="query-user" placeholder="">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default" onclick="getBalence()">查询</button>
+    </div>
+  </div>
+   <div class="form-group">
+    <label class="col-sm-2 control-label">查询结果</label>
+    <div class="col-sm-10">
+      <p class="form-control-static"></p>
+    </div>
+  </div>
+
+</form>
+            </div>
+          </div>
+          </div>
+        </div>
+        </div>
+        
+        <div class="floatdiv"  style="display:none;">
+        	<div class="row" style="position: relative;">
+        	<div class="col-md-6" style="z-index: 99;background-color: rgba(110,110,110,0.5);height: 280px;position: absolute;border-radius: 15px;margin-top: -150px;margin-left: 360px;width: 530px;"><img style="float: left;margin-top:140px;" src="/images/duihao.png"><p style="color:#000000;font-size: 17px;font-weight: bold;margin-left: 55px;margin-top: 35px;">jasjdfjaldgjaskljglasgalsgjalgalskafada</p>
+        	</div>
+        </div>
+        </div>
+        <div class="clearboth"></div>
+        <div class="row" id="row1" style="margin-top: 30px;border: 1px solid #5f8c89;padding: 0px;height: 250px;">
+        <div class="col-md-12" style="height: 40px;">
+        	<div style="margin-top: 8px;"><p style="font-size: 18px;font-weight: bold;">Blocks</p>
+        	</div>
+        	<div class="col-md-12" id="divide_h" style="border-top: 1px solid #5f8c89;width: 1167px;margin-left: -15px;"></div>
+        </div>
+        <div class="clearboth"></div>
+        <div style="width: 1167px;height: 210px;overflow: auto;">
+        	<div id="movediv"></div>
+        </div>
+        </div>
+        <hr/>
+	</div>
+        <div class="clearboth"></div>
+
+<script >
+	$(function () {
+  $('[data-toggle="popover"]').popover();
+})
+</script>
+<script>
+// $(function(){
+// 	setInterval(adddiv,1000);
+// })
+
+function adddiv(){
+	$("#movediv").append('<div class="blockdiv" ><div class="blockdiv1" onclick ="divtoggle()" ><p>ahldjsklvncz,vnczkhvnhaksjdnlnadlfkjelgjlsdjlhlka</p></div><div class="blockdiv2" ><p></p></div></div>');
+	$("#movediv").width($("#movediv").width()+270);
+
+}
+function divtoggle(){
+	$(".floatdiv").toggle();
+}
+
+function get_time(){
+    var timestamp=new Date().getTime();
+    var ran = Math.floor(Math.random()*10);
+    var s = timestamp+ran;
+    var randomid = s.toString();
+    return randomid;
+}
+
+function assign(){
+    var id=get_time();
+    var name=document.getElementById("user-name").value;
+    var contact=document.getElementById("contact-way").value;
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/assign",
+                data: {
+                    id:id,
+                    uName:name,
+                    pwd:"",
+                    contact:contact,
+                    fcn:"assign"
+                },
+                success: function(data){
+                    window.location.reload();
+                },
+                dataType: 'json',
+            });
+}
+
+function transfer(){
+    var name=document.getElementById("src-user").value;
+    var name2=document.getElementById("goal-user").value;
+    var amount=document.getElementById("Amount").value;
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/transfer",
+        data: {
+            uName:name,
+            gName:name2,
+            amount:amount,
+            fcn:"transfer"
+        },
+        success: function(data){
+            location.reload();
+        },
+        dataType: 'json',
+    });
+}
+
+function getBalence(){
+    var name=document.getElementById("query-user").value;
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/getBalence",
+        data: {
+            uName:name,
+            fcn:"getBalence"
+        },
+        success: function(data){
+            location.reload();
+        },
+        dataType: 'json',
+    });
+}
+
+
+	// function adddiv(){
+	// 	$("#movediv").append('<div class="blockdiv" ><div class="blockdiv1" ><p>ahldjsklvncz,vnczkhvnhaksjdnlnadlfkjelgjlsdjlhlka</p></div><div class="blockdiv2" ><p></p></div></div>');
+	// }
+	// $(".blockdiv").click(function(){
+	// 	$(".blockdiv").offset(function(n,c){
+	// 		newPos = new Object();
+	// 		newPos.left = c.left+500;
+	// 		return newPos;
+	// 	});
+	// });
+	// $(".blockdiv1").click(function(){
+ //        			$(".floatdiv").toggle();
+ //    });
+// 	function show(){
+//    var mydate = new Date();
+//    var str = "" + mydate.getFullYear() + "年";
+//    str += (mydate.getMonth()+1) + "月";
+//    str += mydate.getDate() + "日";
+//    str += mydate.getHours() + ":";//获取当前小时数(0-23)
+//    str += mydate.getMinutes() +":"; //获取当前分钟数(0-59)
+//    str += mydate.getSeconds();
+//    return str;
+//   }
+//   $(".blockdiv2").click(function() {
+// 		$(".blockdiv2 p").html(""+show()+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0]");
+// 	});
+
+
+
+</script>
+</body>
+</html>
